@@ -1,0 +1,8 @@
+---
+# Playbook principal pour déployer un cluster k3d et NGINX personnalisé
+- name: Déploiement complet k3d + NGINX personnalisé
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  roles:
+    - k3d_cluster

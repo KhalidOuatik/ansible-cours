@@ -12,6 +12,7 @@ services:
     volumes:
       - ./config:/root/config
       - ./ssh-ansible:/root/.ssh  # Ajout du volume persistant pour la clé SSH
+      - /var/run/docker.sock:/var/run/docker.sock  # Permet au conteneur Ansible d'accéder à Docker de l'hôte
     networks:
       - ansible_net
 

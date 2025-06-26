@@ -1,0 +1,9 @@
+---
+- name: Installer k3d et Docker CLI
+  ansible.builtin.import_tasks: install_k3d.yml
+
+- name: Créer le cluster k3d
+  ansible.builtin.import_tasks: create_cluster.yml
+
+- name: Déployer NGINX dans le cluster k3d
+  ansible.builtin.import_tasks: deploy_nginx.yml

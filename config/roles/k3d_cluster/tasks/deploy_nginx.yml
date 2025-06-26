@@ -1,0 +1,6 @@
+---
+- name: Déployer le manifest nginx.yaml dans le cluster k3d
+  ansible.builtin.shell: |
+    k3d kubeconfig get demo > /tmp/kubeconfig-demo.yaml
+    KUBECONFIG=/tmp/kubeconfig-demo.yaml kubectl apply -f {{ role_path }}/files/nginx.yaml
+  become: true

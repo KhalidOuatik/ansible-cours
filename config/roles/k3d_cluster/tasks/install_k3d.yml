@@ -1,0 +1,42 @@
+---
+- name: Installer les dépendances pour k3d et Docker CLI
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+    update_cache: true
+  become: true
+
+- name: Ajouter la clé GPG Docker
+  ansible.builtin.shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  become: true
+
+- name: Ajouter le dépôt Docker
+  ansible.builtin.shell: echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+  become: true
+
+- name: Installer Docker CLI
+  ansible.builtin.apt:
+    name: docker-ce-cli
+    state: present
+    update_cache: true
+  become: true
+
+- name: Installer k3d
+  ansible.builtin.shell: curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+  args:
+    creates: /usr/local/bin/k3d
+  become: true
+
+- name: Installer kubectl (version stable)
+  ansible.builtin.shell: |
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    install -m 0755 kubectl /usr/local/bin/kubectl
+    rm kubectl
+  args:
+    creates: /usr/local/bin/kubectl
+  become: true
