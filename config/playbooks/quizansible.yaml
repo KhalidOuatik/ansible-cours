@@ -48,7 +48,7 @@
         chdir: /opt/quiz-ansible
       changed_when: false
 
-    - name: Installer serve en global
+    - name: Installer serve
       community.general.npm:
         name: serve
         global: true

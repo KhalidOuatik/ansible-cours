@@ -12,4 +12,3 @@
     - name: Exécuter le script
       ansible.builtin.command: /root/script1.sh
       changed_when: false
-      
