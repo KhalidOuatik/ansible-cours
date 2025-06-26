@@ -1,8 +1,8 @@
 ---
-# Playbook pour déployer un cluster k3d et NGINX personnalisé via le rôle k3d_cluster
+# Playbook pour déployer un cluster k3d et NGINX personnalisé via le rôle ansible-role-k3d
 - name: Déploiement k3d + NGINX via rôle
   hosts: localhost
   connection: local
   gather_facts: true
   roles:
-    - k3d_cluster
+    - ansible-role-k3d

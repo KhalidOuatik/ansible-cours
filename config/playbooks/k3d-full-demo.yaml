@@ -5,4 +5,4 @@
   connection: local
   gather_facts: true
   roles:
-    - k3d_cluster
+    - ansible-role-k3d
