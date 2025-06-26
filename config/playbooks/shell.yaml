@@ -1,0 +1,13 @@
+---
+- name: Tester le module shell avec un pipe
+  hosts: client1
+  become: true
+  tasks:
+    - name: Utiliser le module shell avec un pipe
+      ansible.builtin.shell: set -o pipefail; cat /etc/passwd | grep root
+      register: result_shell
+      changed_when: false
+
+    - name: Afficher le résultat du module shell
+      ansible.builtin.debug:
+        var: result_shell.stdout

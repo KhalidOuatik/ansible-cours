@@ -1,0 +1,14 @@
+---
+- name: Tester le module command avec un pipe
+  hosts: client1
+  become: true
+  tasks:
+    - name: Tenter un pipe avec le module command
+      ansible.builtin.command:
+        cmd: cat /etc/passwd | grep root
+      register: result_command
+      changed_when: false
+
+    - name: Afficher le résultat du module debug
+      ansible.builtin.debug:
+        var: result_command.stdout

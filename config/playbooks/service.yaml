@@ -1,0 +1,26 @@
+---
+- name: Gérer les états du service apache2
+  hosts: all
+  become: true
+  vars:
+    etat_apache: started  # Valeurs possibles : started, stopped, restarted
+  tasks:
+    - name: Vérifier si apache2 est installé
+      ansible.builtin.shell: set -o pipefail; dpkg -l | grep apache2 || true
+      register: result_apache
+      changed_when: false
+
+    - name: Afficher le résultat de la vérification
+      ansible.builtin.debug:
+        msg: >-
+          {% if result_apache.stdout == '' %}
+            Apache2 n'est pas installé.
+          {% else %}
+            Apache2 est installé : {{ result_apache.stdout }}
+          {% endif %}
+
+    - name: Gérer l'état du service apache2
+      ansible.builtin.service:
+        name: apache2
+        state: "{{ etat_apache }}"
+      when: result_apache.stdout != ''

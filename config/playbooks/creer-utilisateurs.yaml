@@ -1,0 +1,15 @@
+---
+- name: Création de plusieurs utilisateurs
+  hosts: all
+  become: true
+  vars:
+    utilisateurs:
+      - khalid
+      - pierre
+      - louis
+  tasks:
+    - name: Créer les utilisateurs
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ utilisateurs }}"

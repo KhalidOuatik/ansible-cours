@@ -1,0 +1,12 @@
+---
+- name: Créer l'utilisateur pierre sur toutes les machines distantes
+  hosts: all
+  become: true
+  tasks:
+    - name: Créer l'utilisateur pierre avec home et shell bash
+      ansible.builtin.user:
+        name: pierre
+        home: /home/pierre
+        shell: /bin/bash
+        state: present
+        create_home: true

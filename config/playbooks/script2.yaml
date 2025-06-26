@@ -1,0 +1,7 @@
+---
+- name: Transférer et exécuter un script shell sur toutes les machines
+  hosts: all
+  become: true
+  tasks:
+    - name: Exécuter le script script2.sh sur les machines distantes
+      ansible.builtin.script: /root/config/script2.sh

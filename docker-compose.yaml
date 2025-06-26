@@ -1,9 +1,10 @@
----
+version: '3.8'
 
 services:
   ansible:
+    platform: linux/amd64
     hostname: ansible
-    image: ftutorials/ubuntu-ssh:1.0
+    image: ftutorials/ubuntu-ansible:1.0
     container_name: ansible
     ports:
       - "2222:22"
@@ -14,6 +15,7 @@ services:
       - ansible_net
 
   client1:
+    platform: linux/amd64
     hostname: client1
     image: ftutorials/ubuntu-ssh:1.0
     container_name: client1
@@ -25,6 +27,7 @@ services:
       - ansible_net
 
   client2:
+    platform: linux/amd64
     hostname: client2
     image: ftutorials/ubuntu-ssh:1.0
     container_name: client2
@@ -36,6 +39,7 @@ services:
       - ansible_net
 
   client3:
+    platform: linux/amd64
     hostname: client3
     image: ftutorials/rocky-ssh:1.0
     container_name: client3
@@ -47,6 +51,7 @@ services:
       - ansible_net
 
   client4:
+    platform: linux/amd64
     hostname: client4
     image: ftutorials/rocky-ssh:1.0
     container_name: client4
@@ -58,7 +63,8 @@ services:
       - ansible_net
 
   quiz-ansible:
-    image: ftutorials/quiz:ansible-1
+    platform: linux/amd64
+    image: ftutorials/quiz:ansible-4
     container_name: quiz-ansible
     ports:
       - "3000:3000"

@@ -1,0 +1,44 @@
+---
+- name: Installer et vérifier Apache2 (Ubuntu)
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Installer le package apache2
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: true
+
+    - name: S'assurer que le service apache2 est démarré
+      ansible.builtin.service:
+        name: apache2
+        state: started
+        enabled: true
+
+    - name: Vérifier si apache2 est installé
+      ansible.builtin.shell: set -o pipefail; dpkg -l | grep apache2 || true
+      register: result_check
+      changed_when: false
+
+    - name: Afficher le résultat de la vérification
+      ansible.builtin.debug:
+        msg: >-
+          {% if result_check.stdout == '' %}
+            Apache2 n'est pas installé.
+          {% else %}
+            Apache2 est installé : {{ result_check.stdout }}
+          {% endif %}
+
+    - name: Vérifier que le service apache2 est actif
+      ansible.builtin.shell: set -o pipefail; ps aux | grep [a]pache2
+      register: result_service
+      changed_when: false
+
+    - name: Afficher l'état du service apache2
+      ansible.builtin.debug:
+        msg: >-
+          {% if 'apache2' in result_service.stdout %}
+            Le service apache2 est en cours d'exécution.
+          {% else %}
+            Le service apache2 n'est pas actif.
+          {% endif %}

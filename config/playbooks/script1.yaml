@@ -1,0 +1,15 @@
+---
+- name: Déployer et exécuter un script shell sur client1
+  hosts: client1
+  become: true
+  tasks:
+    - name: Copier le script script1.sh sur client1
+      ansible.builtin.copy:
+        content: "#!/bin/bash\ntouch /root/test1\n"
+        dest: /root/script1.sh
+        mode: '0755'
+
+    - name: Exécuter le script
+      ansible.builtin.command: /root/script1.sh
+      changed_when: false
+      

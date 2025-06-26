@@ -1,0 +1,16 @@
+---
+- name: Installer Apache uniquement sur Debian/Ubuntu
+  hosts: all
+  become: true
+  tasks:
+    - name: Installer Apache2 si OS Debian/Ubuntu
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: true
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: Afficher un message de confirmation
+      ansible.builtin.debug:
+        msg: "Apache2 a été installé sur {{ inventory_hostname }} (famille Debian)"
+      when: ansible_facts['os_family'] == 'Debian'

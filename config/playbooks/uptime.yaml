@@ -1,0 +1,13 @@
+---
+- name: Afficher l'état de fonctionnement (uptime) des machines Ubuntu
+  hosts: ubuntu
+  become: true
+  tasks:
+    - name: Exécuter la commande uptime
+      ansible.builtin.command: uptime
+      register: resultat_uptime
+      changed_when: false
+
+    - name: Afficher le résultat de uptime
+      ansible.builtin.debug:
+        var: resultat_uptime.stdout

@@ -1,0 +1,21 @@
+---
+- name: Arrêter le processus sleep sur client1
+  hosts: client1
+  become: true
+  tasks:
+    - name: Rechercher le(s) PID du processus sleep
+      ansible.builtin.command: pgrep sleep
+      register: process_encours
+      changed_when: false
+      failed_when: false
+
+    - name: Arrêter le processus sleep si trouvé
+      ansible.builtin.command: kill {{ process_encours.stdout_lines | join(' ') }}
+      when: process_encours.rc == 0 and process_encours.stdout != ""
+      changed_when: false
+      failed_when: false
+
+    - name: Afficher le résultat
+      ansible.builtin.debug:
+        msg: "Processus sleep arrêté (PID(s): {{ process_encours.stdout_lines | join(', ') }})"
+      when: process_encours.rc == 0 and process_encours.stdout != ""

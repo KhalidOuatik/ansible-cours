@@ -1,0 +1,17 @@
+---
+- name: Modifier les permissions du fichier /root/vinci sur les clients Ubuntu
+  hosts: ubuntu
+  become: true
+  tasks:
+    - name: Créer le fichier /root/vinci s'il n'existe pas
+      ansible.builtin.file:
+        path: /root/vinci
+        state: touch
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Ajouter les permissions d'écriture pour tous
+      ansible.builtin.file:
+        path: /root/vinci
+        mode: '0666'

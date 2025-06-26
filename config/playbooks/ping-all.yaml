@@ -1,0 +1,7 @@
+---
+- name: Tester la connexion SSH avec le module ping
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Ping des machines distantes
+      ansible.builtin.ping:

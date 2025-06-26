@@ -1,0 +1,15 @@
+---
+- name: Définir le mot de passe de l'utilisateur pierre
+  hosts: all
+  become: true
+  vars:
+    newpass: "{{ newpass }}"
+  tasks:
+    - name: Générer le hash du mot de passe
+      ansible.builtin.set_fact:
+        pierre_password: "{{ newpass | password_hash('sha512') }}"
+
+    - name: Définir le mot de passe de pierre
+      ansible.builtin.user:
+        name: pierre
+        password: "{{ pierre_password }}"

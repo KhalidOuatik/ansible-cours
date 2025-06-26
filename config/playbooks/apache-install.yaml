@@ -1,0 +1,16 @@
+---
+- name: Installer et démarrer Apache2 (Ubuntu)
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Installer le package apache2
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: true
+
+    - name: S'assurer que le service apache2 est démarré
+      ansible.builtin.service:
+        name: apache2
+        state: started
+        enabled: true

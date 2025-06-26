@@ -1,0 +1,14 @@
+---
+- name: Créer un fichier vide sur tous les clients avec un nom variable
+  hosts: all
+  become: true
+  vars:
+    nom_fichier: khalid
+  tasks:
+    - name: Créer le fichier vide dans /tmp
+      ansible.builtin.file:
+        path: "/tmp/{{ nom_fichier }}.log"
+        state: touch
+        owner: root
+        group: root
+        mode: '0644'

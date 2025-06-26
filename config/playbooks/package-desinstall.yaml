@@ -1,0 +1,24 @@
+---
+- name: Désinstallation de paquets sur tous les hôtes
+  hosts: all
+  become: true
+  vars:
+    packages_to_remove:
+      - telnet
+      - curl
+      - wget
+  tasks:
+    - name: Désinstaller les paquets sur Debian/Ubuntu
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: absent
+        update_cache: true
+      loop: "{{ packages_to_remove }}"
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: Désinstaller les paquets sur RedHat/Rocky
+      ansible.builtin.yum:
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ packages_to_remove }}"
+      when: ansible_facts['os_family'] == 'RedHat'

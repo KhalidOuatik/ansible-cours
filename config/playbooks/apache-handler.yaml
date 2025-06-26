@@ -1,0 +1,33 @@
+---
+- name: Mise à jour du fichier index.html et gestion du handler Apache
+  hosts: ubuntu
+  become: true
+  tasks:
+    - name: Installer Apache2 (si besoin)
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+        update_cache: true
+
+    - name: S'assurer que /var/www/html existe
+      ansible.builtin.file:
+        path: /var/www/html
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Copier le fichier index.html
+      ansible.builtin.copy:
+        src: ./index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Redémarrer apache2
+
+  handlers:
+    - name: Redémarrer apache2
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
