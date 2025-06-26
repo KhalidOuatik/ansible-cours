@@ -1,4 +1,14 @@
 ---
+# Exercice 10 : Modifier les permissions d’un fichier distant en ajoutant les permissions d’écriture pour tous les utilisateurs en utilisant un playbook Ansible et le module file.
+# Documentation :
+# - Sur les machines distantes de type ubuntu client1 et client2, créez un fichier vide nommé /root/vinci
+# - Vérifiez les permissions actuelles du fichier.
+# - Sur le serveur Ansible, créez le playbook ansible permission.yaml à l’aide de la documentation.
+# - Sur le serveur Ansible, exécutez le playbook ansible permission.yaml
+# - Vérifiez sur une machine distante que les permissions ont bien été modifiées.
+#
+# Ne modifiez pas la logique métier du playbook.
+
 - name: Modifier les permissions du fichier /root/vinci sur les clients Ubuntu
   hosts: ubuntu
   become: true

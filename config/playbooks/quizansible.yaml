@@ -1,13 +1,39 @@
+# Exercice 25 : Créer un playbook Ansible qui automatise le déploiement d’une application Node.js (quizansible) à partir d’un script bash fourni sur les hôtes de type Rocky Linux.
+# Sur le serveur Ansible, executez le playbook ansible quiz-ansible.yaml et effectuez les vérifications.
+# Sur le serveur Ansible, créez le playbook quizansible.yaml permettant de :
+# - Mettre à jour les paquets
+# - Installer git
+# - Télécharger le script d'installation Node.js avec get_url
+# - Exécuter le script téléchargé
+# - Installer nodejs
+# - Cloner le dépôt Git dans /opt/quiz-ansible
+# - Installer les dépendances npm install
+# - Compiler l’app avec npm run build
+# - Installer serve en global avec le module npm
+# - Lancer l’app en tâche de fond avec shell
+#
+# Exemple bash :
+# dnf update -y && \
+# dnf install -y git && \
+# curl -fsSL https://rpm.nodesource.com/setup_23.x | bash - && \
+# dnf install -y nodejs && \
+# git clone https://github.com/franklin-tutorials/quiz-ansible.git && \
+# cd quiz-ansible && \
+# npm install && \
+# npm run build && \
+# npm install -g serve && \
+# serve -s dist
+# Vérifiez le bon fonctionnement de quiz-ansible sur les hôtes de type Rocky Linux
 ---
 - name: Déploiement de l'application quiz-ansible sur Rocky Linux
   hosts: rocky
   become: true
   tasks:
-    # - name: Mettre à jour les paquets
-    #   ansible.builtin.dnf:
-    #     name: "*"
-    #     state: present
-    #     update_cache: true
+    - name: Mettre à jour les paquets
+      ansible.builtin.dnf:
+        name: "*"
+        state: present
+        update_cache: true
 
     - name: Installer git
       ansible.builtin.dnf:
@@ -48,7 +74,7 @@
         chdir: /opt/quiz-ansible
       changed_when: false
 
-    - name: Installer serve
+    - name: Installer serve en global
       community.general.npm:
         name: serve
         global: true

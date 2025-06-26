@@ -1,11 +1,19 @@
+# Exercice 29 : Apprendre à utiliser une boucle dans un playbook Ansible pour créer plusieurs utilisateurs de manière automatisée.
+# Vous devez créer les comptes utilisateurs suivants sur plusieurs serveurs : karim, sarah, louis.
+# Executer le playbook creer-utilisateurs.yaml et effectuez les vérifications.
+# Sur le serveur Ansible, créez le fichier playbook creer-utilisateurs.yaml qui doit :
+# - S’exécuter sur tous les hôtes.
+# - Contenir une variable appelée utilisateurs contenant la liste des noms des utilisateurs à créer.
+# - Utiliser le module user
+# - Utiliser la directive loop
 ---
 - name: Création de plusieurs utilisateurs
   hosts: all
   become: true
   vars:
     utilisateurs:
-      - khalid
-      - pierre
+      - karim
+      - sarah
       - louis
   tasks:
     - name: Créer les utilisateurs

@@ -1,3 +1,10 @@
+# Exercice 30 : Apprendre à utiliser une boucle dans un playbook Ansible pour désinstaller des paquets de manière automatisée en fonction de système d’exploitation.
+# Executer le playbook package-desinstall.yaml et effectuez les vérifications.
+# Sur le serveur Ansible, créez le fichier playbook package-desinstall.yaml qui doit :
+# - S’exécuter sur tous les hôtes.
+# - Utiliser une boucle pour désinstaller trois paquets : telnet, curl, wget.
+# - Utiliser le module apt si le système est Debian/Ubuntu.
+# - Utiliser le module yum si le système est RedHat/Rocky.
 ---
 - name: Désinstallation de paquets sur tous les hôtes
   hosts: all

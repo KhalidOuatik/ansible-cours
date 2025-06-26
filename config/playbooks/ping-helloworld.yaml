@@ -1,4 +1,12 @@
 ---
+# Exercice 3 : Créer un playbook qui teste la connectivité (ping) sur la machine locale et qui affiche "Hello World".
+# Consignes :
+# - Créez le fichier playbook ansible ping-helloworld.yaml qui teste la connectivité (ping) sur la machine locale.
+# - Affichez "Hello World" à l’aide du module debug.
+# - Utilisez la documentation Ansible pour vous aider.
+#
+# Ne modifiez pas la logique métier du playbook.
+
 - name: Mon premier playbook
   hosts: localhost
   tasks:

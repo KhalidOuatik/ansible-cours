@@ -1,4 +1,13 @@
 ---
+# Exercice 19 : Créer un playbook permettant de créer un fichier depuis la machine de contrôle vers tous les clients distants, en utilisant des variables pour rendre le script réutilisable.
+# Documentations :
+# - Déclarez une variable appelée nom_fichier et attribuez-lui une valeur (par exemple toto).
+# - Utilisez le module file pour créer un fichier vide (state: touch).
+# - Le nom du fichier doit être basé sur la variable nom_fichier (par exemple /tmp/toto.log).
+# - Exécutez le playbook creer-fichier.yaml et vérifiez sur les machines distantes dans le répertoire /tmp que le fichier a bien été créé avec le nom attendu.
+#
+# Ne modifiez pas la logique métier du playbook.
+
 - name: Créer un fichier vide sur tous les clients avec un nom variable
   hosts: all
   become: true

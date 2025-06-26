@@ -1,4 +1,13 @@
 ---
+# Exercice 5 : Créer un playbook qui désinstalle le package apache2.
+# Consignes :
+# - Créez le fichier playbook ansible apache-desinstall.yaml qui désinstalle le package apache2 à l’aide de la documentation.
+# - Vérifiez si apache2 est installé.
+# - Effectuez les vérifications nécessaires.
+# - Exécutez le playbook ansible apache-desinstall.yaml.
+#
+# Ne modifiez pas la logique métier du playbook.
+
 - name: Désinstaller Apache2 (Ubuntu)
   hosts: localhost
   become: true

@@ -1,3 +1,10 @@
+# Exercice 28 : Apprendre à utiliser l’instruction conditionnelle when avec l’opérateur logique or, afin d’adapter l’exécution à la famille du système d’exploitation (Debian, RedHat, etc.).
+# Executer le playbook nginx-install.yaml et observez le resultat.
+# Sur le serveur Ansible, créez le fichier playbook nginx-install.yaml qui doit :
+# - S’exécuter sur tous les hôtes.
+# - Utiliser la commande apt pour installer nginx si les hôtes qui appartiennent à la famille Debian.
+# - Utiliser la commande yum pour installer nginx si la machine appartient à la famille RedHat ou SUSE.
+# - Utiliser l’instruction when pour appliquer la bonne commande selon le système.
 ---
 - name: Installer nginx selon la famille du système
   hosts: all
@@ -11,7 +18,7 @@
       when: ansible_facts['os_family'] == 'Debian'
 
     - name: Installer nginx sur RedHat/SUSE
-      ansible.builtin.dnf:
+      ansible.builtin.yum:
         name: nginx
         state: present
       when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] == 'Suse'

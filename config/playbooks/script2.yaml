@@ -1,7 +1,16 @@
+# Exercice 13 : Créez un playbook Ansible qui transfère et exécute un script shell sur toutes les machines distantes en utilisant le module script.
+# Consignes :
+# 1. Sur le serveur Ansible, créez un script nommé /root/script2.sh qui crée un fichier vide nommé /root/test2.
+# 2. Créez le fichier playbook script2.yaml à l’aide de la documentation.
+# 3. Exécutez le playbook ansible script2.yaml
+# 4. Vérifiez sur toutes les machines distantes si le fichier /root/test2 a bien été créé.
+#
+# Ne modifiez pas la logique métier du playbook.
 ---
 - name: Transférer et exécuter un script shell sur toutes les machines
   hosts: all
   become: true
   tasks:
-    - name: Exécuter le script script2.sh sur les machines distantes
-      ansible.builtin.script: /root/config/script2.sh
+    - name: Exécuter le script script2.sh
+      ansible.builtin.script: /root/script2.sh
+      changed_when: false

@@ -1,14 +1,18 @@
+# Exercice 12 : Comprendre la différence entre les modules command et shell en observant leur comportement face aux redirections et pipes.
+# Documentation :
+# Sur le serveur Ansible, créez le fichier playbook command.yaml afin d’executer la commande “cat /etc/passwd | grep root” sur le client1.
+# Sur le serveur Ansible, créez le fichier playbook shell.yaml afin d’executer la commande “cat /etc/passwd | grep root” sur le client1.
+# Sur le serveur Ansible, executez les playbooks ansible command.yaml et shell.yaml
 ---
-- name: Tester le module command avec un pipe
+- name: Exécution de cat /etc/passwd | grep root avec le module command
   hosts: client1
   become: true
   tasks:
-    - name: Tenter un pipe avec le module command
-      ansible.builtin.command:
-        cmd: cat /etc/passwd | grep root
-      register: result_command
-      changed_when: false
+    - name: Tenter d'exécuter la commande avec command (échouera sur le pipe)
+      ansible.builtin.command: cat /etc/passwd | grep root
+      register: resultat_command
+      ignore_errors: true
 
-    - name: Afficher le résultat du module debug
+    - name: Afficher le résultat du module command
       ansible.builtin.debug:
-        var: result_command.stdout
+        var: resultat_command.stdout

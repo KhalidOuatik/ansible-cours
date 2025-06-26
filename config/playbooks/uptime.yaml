@@ -1,4 +1,15 @@
 ---
+# Exercice 20 : Créer un playbook Ansible permettant de récupérer et d’afficher l’état de fonctionnement des machines distantes de type Debian/Ubuntu à l’aide de la commande uptime.
+# Documentations :
+# - Sur le serveur Ansible, créez le fichier uptime.yaml dans lequel :
+#   - Vous définissez un playbook qui s’exécute sur toutes les machines Ubuntu.
+#   - Vous utilisez le module de votre choix pour exécuter la commande uptime.
+#   - Vous enregistrez le résultat de cette commande dans une variable avec register.
+#   - Vous affichez ensuite ce résultat à l’aide du module debug.
+# - Sur le serveur Ansible, exécutez le playbook ansible uptime.yaml
+#
+# Ne modifiez pas la logique métier du playbook.
+
 - name: Afficher l'état de fonctionnement (uptime) des machines Ubuntu
   hosts: ubuntu
   become: true

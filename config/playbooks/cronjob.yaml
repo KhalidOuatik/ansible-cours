@@ -1,4 +1,13 @@
 ---
+# Exercice 14 : Créer un playbook Ansible pour planifier une tâche automatique à l’aide du module cron.
+# Documentations :
+# - Sur la machine distante (client1), créez un script nommé /root/script1.sh qui crée un fichier vide nommé /root/test1. Pensez à rendre le script exécutable.
+# - Sur le serveur Ansible, créez le fichier playbook cronjob.yaml qui met à jour la liste des paquets APT, installe le paquet cron puis planifie l’exécution de script1.sh tous les lundis à 15h10.
+# - Sur le serveur Ansible, exécutez le playbook ansible cronjob.yaml
+# - Vérifiez sur la machine distante client1 à l’aide de la commande crontab -l que l’exécution du script1.sh a bien été planifiée.
+#
+# Ne modifiez pas la logique métier du playbook.
+
 - name: Planifier une tâche cron pour exécuter script1.sh sur client1
   hosts: client1
   become: true

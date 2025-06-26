@@ -1,3 +1,13 @@
+# Exercice 31 : Creer un playbook Ansible qui va repérer et arrêter un processus en cours d'exécution sur une machine distante.
+# Sur la machine distante (client1), exécuter cette commande pour simuler un processus en cours :
+# sleep 5000 &
+# Sur le serveur Ansible, executez le playbook ansible arret-processus.yaml
+# Vérifiez sur la machine distante client1 de l’arrêt du processus sleep.
+# Sur le serveur Ansible, créez le fichier playbook arret-processus.yaml qui permettra de :
+# - Rechercher un processus en cours à partir de son nom (sleep ici).
+# - Ignorer les erreurs si aucun processus n’est trouvé.
+# - Stocker le résultat dans une variable (process_encours).
+# - Utiliser le module shell pour tuer le processus identifié à l’aide de son PID.
 ---
 - name: Arrêter le processus sleep sur client1
   hosts: client1

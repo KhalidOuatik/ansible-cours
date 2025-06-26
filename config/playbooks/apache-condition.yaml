@@ -1,3 +1,11 @@
+# Exercice 27 : Apprendre à utiliser when pour exécuter une tâche uniquement si une condition est remplie.
+# Executer le playbook apache-condition.yaml.
+# Sur le serveur Ansible, créez le fichier playbook apache-condition.yaml qui doit :
+# S’exécuter sur tous les hôtes.
+# Installer Apache (apache2) uniquement si le système d’exploitation appartient à la famille "Debian" (ex : Debian ou Ubuntu).
+# Afficher un message de confirmation après l'installation.
+# Les conditions
+# Effectuez les vérifications.
 ---
 - name: Installer Apache uniquement sur Debian/Ubuntu
   hosts: all

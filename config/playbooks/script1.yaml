@@ -1,3 +1,9 @@
+# Exercice 11 : Creer un playbook Ansible qui execute un script shell sur les machines distantes en utilisant le module shell.
+# Documentation :
+# Sur la machine distante (client1), créez un script nommé /root/script1.sh qui crée un fichier vide nommé /root/test1. Et penser à rendre le script executable.
+# Sur le serveur Ansible, créez le fichier playbook script1.yaml à l’aide de la documentation.
+# Sur le serveur Ansible, executez le playbook ansible script1.yaml
+# Vérifiez sur la machine distante si le fichier /root/test1 a bien été créé.
 ---
 - name: Déployer et exécuter un script shell sur client1
   hosts: client1

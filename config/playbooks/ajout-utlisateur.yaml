@@ -1,4 +1,16 @@
 ---
+# Exercice 15 : Créer un playbook qui crée un utilisateur sur les machines distantes, en spécifiant le répertoire personnel et le shell de connexion.
+# Documentation :
+# - Sur le serveur Ansible, créez le fichier playbook ajout-utlisateur.yaml qui permettra de :
+#   - créer un utilisateur nommé pierre sur les clients distants.
+#   - l'utilisateur pierre aura un répertoire personnel situé dans /home/pierre.
+#   - l’environnement de shell de l'utilisateur Pierre sera /bin/bash.
+# - Sur le serveur Ansible, exécutez le fichier playbook ajout-utlisateur.yaml
+# - Vérifiez au moins sur l’une des machines distantes si l’utilisateur Pierre a bien été créé.
+# - Sur l’une des machines distantes, vérifiez l’absence de l’utilisateur Pierre avant exécution.
+#
+# Ne modifiez pas la logique métier du playbook.
+
 - name: Créer l'utilisateur pierre sur toutes les machines distantes
   hosts: all
   become: true

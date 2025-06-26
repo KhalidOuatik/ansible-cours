@@ -1,3 +1,10 @@
+# Exercice 26 : Créer un playbook qui met à jour un fichier de configuration Apache, puis redémarre le service Apache uniquement si ce fichier est modifié.
+# Pour la réalisation de cet exercice, apache doit être installé et fonctionnel sur les clients distants de type ubuntu.
+# Sur le serveur Ansible, executez le playbook et observez si le handler est déclenché.
+# Sur le serveur Ansible, créez le fichier playbook apache-handler.yaml qui doit :
+# - Copier un fichier index.html vers /var/www/html/index.html sur les clients distants ubuntu.
+# - Utiliser le module copy avec notify pour avertir le handler si un changement est détecté.
+# - Définir un handler qui redémarre le service apache2.
 ---
 - name: Mise à jour du fichier index.html et gestion du handler Apache
   hosts: ubuntu

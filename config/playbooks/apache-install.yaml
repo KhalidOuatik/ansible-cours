@@ -1,4 +1,13 @@
 ---
+# Exercice 4 : Créer un playbook qui installe le package apache2.
+# Consignes :
+# - Créez le fichier playbook ansible apache-install.yaml qui installe et démarre le service apache2 à l’aide de la documentation.
+# - Vérifiez si apache2 est installé.
+# - Effectuez les vérifications nécessaires.
+# - Exécutez le playbook ansible apache-install.yaml.
+#
+# Ne modifiez pas la logique métier du playbook.
+
 - name: Installer et démarrer Apache2 (Ubuntu)
   hosts: localhost
   become: true

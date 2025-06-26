@@ -1,3 +1,14 @@
+# Exercice 22 : Analyser un playbook Ansible simple et corriger les éventuels problèmes de bonnes pratiques.
+# Sur le serveur Ansible, analysez le playbook avec ansible-lint
+# Sur le serveur Ansible, creez un fichier nommé test-apache.yaml avec le contenu suivant :
+# ---
+# - name: Playbook de test apache
+#   hosts: all
+#   become: yes
+#   tasks:
+#     - name: Installer apache2
+#       command: apt install apache2
+# Corrigez le playbook selon les recommandations.
 ---
 - name: Playbook de test apache
   hosts: all

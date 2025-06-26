@@ -1,4 +1,13 @@
 ---
+# Exercice 17 : Créer un playbook qui teste les différents états (démarrer, arrêter, redémarrer) du service apache2.
+# Consignes :
+# - Créez le fichier playbook ansible service.yaml qui teste les différents états (démarrer, arrêter, redémarrer) du service apache2.
+# - Vérifiez si apache2 est installé avant d'agir sur le service.
+# - Effectuez la vérification de l'état du service.
+# - Exécutez le playbook ansible service.yaml en fonction de l’état souhaité (utilisez une variable d’état).
+#
+# Ne modifiez pas la logique métier du playbook.
+
 - name: Gérer les états du service apache2
   hosts: all
   become: true

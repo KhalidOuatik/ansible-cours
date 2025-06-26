@@ -1,4 +1,13 @@
 ---
+# Exercice 16 : Ajouter ou modifier le mot de passe d’un utilisateur sur les machines distantes en utilisant une variable sécurisée dans un playbook.
+# Documentations :
+# - Sur le serveur Ansible, créez le fichier playbook ajout-pass.yaml pour ajouter le mot de passe à l’utilisateur Pierre créé précédemment.
+# - Sur le serveur Ansible, exécutez le fichier playbook ajout-pass.yaml sans oublier de passer la valeur de la variable newpass.
+# - Vérifiez avec la méthode de votre choix si le mot de passe défini pour l’utilisateur Pierre fonctionne.
+# - Le mot de passe sera fourni à l'exécution via une variable externe newpass.
+# - Le mot de passe sera automatiquement haché avec l’algorithme sha512 pour des raisons de sécurité.
+#
+# Ne modifiez pas la logique métier du playbook.
 - name: Définir le mot de passe de l'utilisateur pierre
   hosts: all
   become: true
