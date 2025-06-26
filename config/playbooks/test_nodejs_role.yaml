@@ -1,6 +1,7 @@
 ---
-- name: Test du rôle ansible-role-nodejs
+- name: Test du rôle khalidouatik.ansible_role_nodejs
   hosts: all
   become: true
+  gather_facts: true
   roles:
-    - ansible-role-nodejs
+    - khalidouatik.ansible_role_nodejs
