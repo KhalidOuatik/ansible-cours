@@ -34,6 +34,14 @@ RUN sed -i 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid
 # Exposer le port SSH
 EXPOSE 22
 
+# Copie la clé publique dans le conteneur (à placer dans le même dossier que le Dockerfile avant build)
+COPY id_rsa.pub /tmp/id_rsa.pub
+
+# Ajoute la clé publique à authorized_keys à chaque build (création sûre)
+RUN mkdir -p /root/.ssh && \
+    if [ -s /tmp/id_rsa.pub ]; then cat /tmp/id_rsa.pub > /root/.ssh/authorized_keys; fi && \
+    rm -f /tmp/id_rsa.pub
+
 # Lancer SSH en avant-plan pour maintenir le conteneur actif
 #CMD ["/usr/sbin/sshd", "-D"]
 CMD ["/bin/bash", "-c", "ssh-keygen -A && /usr/sbin/sshd -D"]

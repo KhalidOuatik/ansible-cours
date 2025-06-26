@@ -11,13 +11,15 @@ services:
       - "80:80"
     volumes:
       - ./config:/root/config
+      - ./ssh-ansible:/root/.ssh  # Ajout du volume persistant pour la clé SSH
     networks:
       - ansible_net
 
   client1:
     platform: linux/amd64
     hostname: client1
-    image: ftutorials/ubuntu-ssh:1.0
+    build:
+      context: ./ubuntu-ssh
     container_name: client1
     ports:
       - "2223:22"
@@ -29,7 +31,8 @@ services:
   client2:
     platform: linux/amd64
     hostname: client2
-    image: ftutorials/ubuntu-ssh:1.0
+    build:
+      context: ./ubuntu-ssh
     container_name: client2
     ports:
       - "2224:22"
@@ -41,7 +44,8 @@ services:
   client3:
     platform: linux/amd64
     hostname: client3
-    image: ftutorials/rocky-ssh:1.0
+    build:
+      context: ./rocky-ssh
     container_name: client3
     ports:
       - "2225:22"
@@ -53,7 +57,8 @@ services:
   client4:
     platform: linux/amd64
     hostname: client4
-    image: ftutorials/rocky-ssh:1.0
+    build:
+      context: ./rocky-ssh
     container_name: client4
     ports:
       - "2226:22"

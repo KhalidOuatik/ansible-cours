@@ -1,0 +1,6 @@
+---
+- name: Test du rôle ansible-role-nodejs
+  hosts: all
+  become: true
+  roles:
+    - ansible-role-nodejs

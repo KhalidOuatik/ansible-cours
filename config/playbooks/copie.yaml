@@ -1,11 +1,8 @@
 ---
-# Exercice 9 : Copier un fichier depuis la machine de contrôle Ansible vers plusieurs machines distantes en utilisant un Playbook Ansible et le module copy.
-# Documentation :
-# - Sur le serveur Ansible, créez le fichier /root/sdv.conf et écrivez dedans “config de sdv”.
-# - Le fichier créé devra être copié dans le répertoire /tmp des machines distantes.
-# - Sur le serveur Ansible, créez le playbook ansible copie.yaml à l’aide de la documentation.
-# - Sur le serveur Ansible, exécutez le playbook ansible copie.yaml
-# - Vérifiez au moins sur une machine distante que le fichier a bien été copié.
+# Exercice 18 : Adapter le playbook pour copier un fichier depuis la machine de contrôle vers tous les clients distants, en utilisant des variables pour rendre le script réutilisable.
+# Consignes :
+# - Utilisez des variables pour le chemin source (src), le chemin de destination (dest), le propriétaire (owner), le groupe (group) et les permissions (mode).
+# - Le playbook doit permettre de copier n'importe quel fichier en adaptant simplement les variables.
 #
 # Ne modifiez pas la logique métier du playbook.
 

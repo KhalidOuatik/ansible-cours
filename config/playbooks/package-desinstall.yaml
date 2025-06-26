@@ -24,7 +24,7 @@
       when: ansible_facts['os_family'] == 'Debian'
 
     - name: Désinstaller les paquets sur RedHat/Rocky
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: "{{ item }}"
         state: absent
       loop: "{{ packages_to_remove }}"
