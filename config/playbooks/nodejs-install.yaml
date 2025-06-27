@@ -8,4 +8,4 @@
   become: true
   gather_facts: true
   roles:
-    - ansible_role_nodejs
+    - role_nodejs

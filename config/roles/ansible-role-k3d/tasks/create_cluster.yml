@@ -1,10 +1,10 @@
 ---
-- name: Supprimer le cluster k3d demo s'il existe
-  ansible.builtin.shell: k3d cluster delete demo || true
+- name: Supprimer le cluster k3d-lab s'il existe
+  ansible.builtin.shell: k3d cluster delete k3d-lab || true
   ignore_errors: true
   become: true
 
-- name: Créer un cluster k3d nommé "demo"
+- name: Créer un cluster k3d nommé "k3d-lab" avec 1 contrôleur et 1 agent
   ansible.builtin.shell: |
-    k3d cluster create demo --wait --port "30080:30080@loadbalancer"
+    k3d cluster create k3d-lab --servers 1 --agents 1 --wait --port "30080:30080@loadbalancer"
   become: true

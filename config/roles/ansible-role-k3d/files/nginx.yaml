@@ -31,7 +31,7 @@ metadata:
   name: nginx-html
 data:
   index.html: |
-    <html><body><h1>Bien joué cela fonctionne</h1></body></html>
+    <html><body><h1>Bienvenue dans le K3S LAB</h1></body></html>
 ---
 apiVersion: v1
 kind: Service

@@ -1,6 +1,10 @@
 ---
-- name: Déployer le manifest nginx.yaml dans le cluster k3d
+- name: Déployer le manifest nginx.yaml dans le cluster k3d-lab
   ansible.builtin.shell: |
-    k3d kubeconfig get demo > /tmp/kubeconfig-demo.yaml
-    KUBECONFIG=/tmp/kubeconfig-demo.yaml kubectl apply -f {{ role_path }}/files/nginx.yaml
+    k3d kubeconfig get k3d-lab > /tmp/kubeconfig-k3d-lab.yaml
+    KUBECONFIG=/tmp/kubeconfig-k3d-lab.yaml kubectl apply -f {{ role_path }}/files/nginx.yaml
   become: true
+
+- name: Afficher l'URL d'accès au service NGINX
+  ansible.builtin.debug:
+    msg: "Accédez à NGINX sur http://localhost:30080"
