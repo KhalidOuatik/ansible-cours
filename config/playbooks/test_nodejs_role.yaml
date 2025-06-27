@@ -1,7 +1,0 @@
----
-- name: Test du rôle khalidouatik.ansible_role_nodejs
-  hosts: all
-  become: true
-  gather_facts: true
-  roles:
-    - khalidouatik.ansible_role_nodejs

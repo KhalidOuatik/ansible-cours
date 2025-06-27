@@ -1,11 +1,11 @@
 # Exercice 32 : Créer un rôle Ansible complet et portable permettant de déployer une application Node.js (quiz-ansible) depuis un dépôt GitHub, sur tout système Linux conteneurisé de type Debian/Ubuntu ou RedHat/Rocky Linux.
-# Testez votre rôle en créant un playbook nommé ansible-role-nodejs.yaml.
+# Testez votre rôle en créant un playbook nommé ansible_role_nodejs.yaml.
 #
 # Ne modifiez pas la logique métier du playbook.
 ---
-- name: Test du rôle khalidouatik.ansible_role_nodejs
+- name: Test du rôle ansible_role_nodejs
   hosts: all
   become: true
   gather_facts: true
   roles:
-    - khalidouatik.ansible_role_nodejs
+    - ansible_role_nodejs
