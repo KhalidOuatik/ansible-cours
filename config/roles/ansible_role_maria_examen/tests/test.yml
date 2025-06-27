@@ -1,0 +1,10 @@
+#SPDX-License-Identifier: MIT-0
+---
+- hosts: all
+  become: true
+  vars:
+    mariadb_root_password: khalidsecure
+    wordpress_db_password: khalidmdp
+    wordpress_db_user: khalid
+  roles:
+    - role: ansible_role_maria_examen

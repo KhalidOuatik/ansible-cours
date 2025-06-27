@@ -1,0 +1,6 @@
+---
+- name: Déploiement WordPress automatisé
+  hosts: all
+  become: true
+  roles:
+    - ansible_role_examen

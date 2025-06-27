@@ -1,0 +1,10 @@
+---
+# Exemple de playbook pour tester le rôle WordPress
+- hosts: all
+  become: true
+  vars:
+    mariadb_root_password: examplerootPW
+    wordpress_db_password: examplePW
+    wordpress_db_user: example
+  roles:
+    - role: ansible_role_wordpress

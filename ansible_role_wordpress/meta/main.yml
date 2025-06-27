@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: ansible_role_wordpress
+  author: khalidouatik
+  description: Rôle Ansible pour déployer WordPress + MariaDB sur Ubuntu et Rocky Linux
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions: ["20.04", "22.04"]
+    - name: EL
+      versions: ["8", "9"]
+  galaxy_tags:
+    - wordpress
+    - mariadb
+    - apache
+    - web
+    - devops
+    - ansible
+    - linux
+    - automation
+
+dependencies: []

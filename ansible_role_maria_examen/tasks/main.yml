@@ -1,0 +1,161 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for ansible_role_maria_examen
+
+# Tâches principales pour installer WordPress + MariaDB
+
+- name: Installer les dépendances (Ubuntu)
+  ansible.builtin.apt:
+    name:
+      - apache2
+      - php
+      - libapache2-mod-php
+      - php-mysql
+      - mariadb-server
+      - wget
+      - unzip
+    state: present
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Installer les dépendances (Rocky/RedHat)
+  ansible.builtin.dnf:
+    name:
+      - httpd
+      - php
+      - php-mysqlnd
+      - mariadb-server
+      - wget
+      - unzip
+    state: present
+    update_cache: yes
+  when: ansible_os_family == 'RedHat'
+
+- name: S'assurer que le service Apache est démarré
+  ansible.builtin.service:
+    name: "{{ apache_service_name }}"
+    state: started
+    enabled: yes
+
+- name: S'assurer que le service MariaDB est démarré
+  ansible.builtin.service:
+    name: mariadb
+    state: started
+    enabled: yes
+
+- name: Sécuriser MariaDB (changer mot de passe root)
+  ansible.builtin.mysql_user:
+    name: root
+    host: localhost
+    password: "{{ mariadb_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    check_implicit_admin: yes
+    state: present
+
+- name: Supprimer les utilisateurs anonymes
+  community.mysql.mysql_user:
+    name: ''
+    host_all: true
+    state: absent
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+
+- name: Supprimer la base de test
+  community.mysql.mysql_db:
+    name: test
+    state: absent
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+
+- name: Créer la base de données WordPress
+  community.mysql.mysql_db:
+    name: "{{ wordpress_db_name }}"
+    state: present
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+
+- name: Créer l'utilisateur WordPress
+  community.mysql.mysql_user:
+    name: "{{ wordpress_db_user }}"
+    password: "{{ wordpress_db_password }}"
+    priv: "{{ wordpress_db_name }}.*:ALL"
+    host: localhost
+    state: present
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+
+- name: Télécharger WordPress
+  ansible.builtin.get_url:
+    url: https://wordpress.org/latest.zip
+    dest: /tmp/latest.zip
+    mode: '0644'
+
+- name: Décompresser WordPress
+  ansible.builtin.unarchive:
+    src: /tmp/latest.zip
+    dest: /tmp/
+    remote_src: yes
+
+- name: Copier les fichiers WordPress
+  ansible.builtin.copy:
+    src: /tmp/wordpress/
+    dest: /var/www/html/wordpress/
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    remote_src: yes
+
+- name: Générer le fichier wp-config.php
+  ansible.builtin.template:
+    src: wp-config.php.j2
+    dest: /var/www/html/wordpress/wp-config.php
+    owner: www-data
+    group: www-data
+    mode: '0640'
+  notify: reload apache
+
+- name: Déployer la conf Apache WordPress
+  ansible.builtin.template:
+    src: wordpress.conf.j2
+    dest: /etc/apache2/sites-available/wordpress.conf
+    mode: '0644'
+  when: ansible_os_family == 'Debian'
+  notify: reload apache
+
+- name: Déployer la conf Apache WordPress (Rocky)
+  ansible.builtin.template:
+    src: wordpress.conf.j2
+    dest: /etc/httpd/conf.d/wordpress.conf
+    mode: '0644'
+  when: ansible_os_family == 'RedHat'
+  notify: reload apache
+
+- name: Activer le site WordPress (Debian)
+  ansible.builtin.command: a2ensite wordpress.conf
+  args:
+    creates: /etc/apache2/sites-enabled/wordpress.conf
+  when: ansible_os_family == 'Debian'
+  notify: reload apache
+
+- name: Activer le module rewrite (Debian)
+  ansible.builtin.command: a2enmod rewrite
+  args:
+    creates: /etc/apache2/mods-enabled/rewrite.load
+  when: ansible_os_family == 'Debian'
+  notify: reload apache
+
+- name: Redémarrer Apache (Debian)
+  ansible.builtin.service:
+    name: apache2
+    state: restarted
+  when: ansible_os_family == 'Debian'
+
+- name: Redémarrer Apache (Rocky)
+  ansible.builtin.service:
+    name: httpd
+    state: restarted
+  when: ansible_os_family == 'RedHat'
+
+- name: Afficher l'URL d'installation
+  ansible.builtin.debug:
+    msg: "WordPress installé sur {{ wordpress_site_url }}"

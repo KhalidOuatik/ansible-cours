@@ -1,0 +1,16 @@
+---
+# Handlers pour redémarrer/recharger les services
+- name: reload apache
+  ansible.builtin.service:
+    name: "{{ apache_service_name }}"
+    state: reloaded
+
+- name: restart apache
+  ansible.builtin.service:
+    name: "{{ apache_service_name }}"
+    state: restarted
+
+- name: restart mariadb
+  ansible.builtin.service:
+    name: mariadb
+    state: restarted

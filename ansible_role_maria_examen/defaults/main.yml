@@ -1,0 +1,35 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for ansible_role_maria_examen
+
+# Variables par défaut pour le rôle MariaDB + WordPress
+
+# Informations de la base de données
+wordpress_db_name: wordpress_db
+wordpress_db_user: khalid
+wordpress_db_password: khaliddb
+wordpress_db_host: localhost
+mariadb_root_password: khalidmaria
+
+# Informations de l'administrateur WordPress
+wordpress_admin_user: admin
+wordpress_admin_password: khalidadmin
+wordpress_admin_email: admin@example.com
+
+# URL du site WordPress
+wordpress_site_url: http://localhost
+
+# Version de WordPress à installer
+wordpress_version: latest
+
+# Dossier d'installation
+wordpress_install_dir: /var/www/html/wordpress
+
+# Nom du service Apache
+apache_service_name: "{{ 'httpd' if ansible_os_family == 'RedHat' else 'apache2' }}"
+
+# Nom du paquet MariaDB
+mariadb_package_name: "{{ 'mariadb-server' if ansible_os_family == 'RedHat' else 'mariadb-server' }}"
+
+# Nom du paquet PHP
+php_package_name: "{{ 'php' if ansible_os_family == 'RedHat' else 'php' }}"
